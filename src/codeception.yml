@@ -1,0 +1,26 @@
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+params:
+    - .env
+settings:
+    colors: true
+    memory_limit: 1024M
+coverage:
+    enabled: true
+    remote: false
+    remote_context_options:
+        ssl:
+            verify_peer: false
+            verify_peer_name: false
+    include:
+        - app/*
+    exclude:
+      - app/Models/*

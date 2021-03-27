@@ -1,0 +1,38 @@
+ARG PHP_VERSION
+
+FROM objectsystems/php:${PHP_VERSION}
+
+MAINTAINER Web Team <phpteam@objectsystems.com>
+
+RUN apt-get update && apt-get install --allow-unauthenticated -y \
+        curl \
+        git \
+        graphviz \
+        unzip \
+        mysql-client \
+        php${PHP_VERSION}-memcached \
+        php${PHP_VERSION}-dev \
+        php${PHP_VERSION}-xdebug \
+    && echo "" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.remote_enable=1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.profiler_enable=1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.profiler_output_dir=/app/xdebug" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.profiler_output_name=cachegrind.out.%p" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.remote_autostart=1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.remote_timeout = 60000" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.idekey=docker" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.var_display_max_depth=-1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.var_display_max_children=-1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && echo "xdebug.var_display_max_data=-1" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /var/www && chown -R www-data: /var/www \
+    && mkdir -p /xdebug && chown -R www-data: /xdebug \
+    && mkdir -p /var/app/current/storage/logs \
+    && touch /var/app/current/storage/logs/laravel.log && chown -R www-data: /var/app/current/storage/logs
+
+COPY cron.txt /root/cron.txt
+
+RUN crontab -u www-data /root/cron.txt;

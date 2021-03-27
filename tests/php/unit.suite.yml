@@ -1,0 +1,7 @@
+actor: UnitTester
+modules:
+    enabled:
+        - Lumen:
+              bootstrap: '/bootstrap/app.php'
+        - \Helper\Unit
+        - Asserts

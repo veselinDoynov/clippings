@@ -1,0 +1,12 @@
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache
+/storage/*.key
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

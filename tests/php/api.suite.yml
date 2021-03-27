@@ -1,0 +1,15 @@
+actor: ApiTester
+modules:
+    enabled:
+        - Lumen:
+            url: https://%WEB_HOST_NAME%
+            bootstrap: '/bootstrap/app.php'
+            cleanup: true
+        - \Helper\Api
+        - \Helper\LumenRequest
+        - Asserts
+        - Sequence
+        - REST:
+            depends: Lumen
+        - JsonSchema
+bootstrap: _bootstrap.php

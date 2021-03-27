@@ -1,0 +1,33 @@
+[2021-03-27 06:33:57] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Invalid log level. at /app/vendor/illuminate/log/ParsesLogConfiguration.php:49)
+[stacktrace]
+#0 /app/vendor/illuminate/log/LogManager.php(262): Illuminate\\Log\\LogManager->level()
+#1 /app/vendor/illuminate/log/LogManager.php(202): Illuminate\\Log\\LogManager->createSingleDriver()
+#2 /app/vendor/illuminate/log/LogManager.php(118): Illuminate\\Log\\LogManager->resolve()
+#3 /app/vendor/illuminate/log/LogManager.php(98): Illuminate\\Log\\LogManager->get()
+#4 /app/vendor/illuminate/log/LogManager.php(547): Illuminate\\Log\\LogManager->driver()
+#5 /app/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(56): Illuminate\\Log\\LogManager->error()
+#6 /app/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(104): Laravel\\Lumen\\Exceptions\\Handler->report()
+#7 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->sendExceptionToHandler()
+#8 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(109): Laravel\\Lumen\\Application->dispatch()
+#9 /app/public/index.php(28): Laravel\\Lumen\\Application->run()
+#10 {main}
+"} 
+[2021-03-27 06:33:57] laravel.ERROR: Class 'App\Http\Controllers\Calculate' not found {"exception":"[object] (Error(code: 0): Class 'App\\Http\\Controllers\\Calculate' not found at /app/app/Http/Controllers/Document.php:31)
+[stacktrace]
+#0 /app/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Document->calculation()
+#1 /app/vendor/illuminate/container/Util.php(37): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#2 /app/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#3 /app/vendor/illuminate/container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#4 /app/vendor/illuminate/container/Container.php(596): Illuminate\\Container\\BoundMethod::call()
+#5 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(386): Illuminate\\Container\\Container->call()
+#6 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(352): Laravel\\Lumen\\Application->callControllerCallable()
+#7 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(326): Laravel\\Lumen\\Application->callLumenController()
+#8 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(279): Laravel\\Lumen\\Application->callControllerAction()
+#9 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(264): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute()
+#10 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->handleFoundRoute()
+#11 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(426): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#12 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(172): Laravel\\Lumen\\Application->sendThroughPipeline()
+#13 /app/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(109): Laravel\\Lumen\\Application->dispatch()
+#14 /app/public/index.php(28): Laravel\\Lumen\\Application->run()
+#15 {main}
+"} 

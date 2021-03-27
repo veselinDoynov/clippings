@@ -2,7 +2,6 @@
 
 namespace App\Tests\Api;
 
-
 use Codeception\Util\HttpCode;
 
 class CaclulateCest extends BaseCest
@@ -42,6 +41,23 @@ class CaclulateCest extends BaseCest
         $total = json_decode($I->grabResponse(), true);
         $I->assertEquals('1,413.90', number_format($total, 2));
         $I->seeResponseCodeIs(HttpCode::OK);
+    }
+
+    /**
+     * @group calculate
+     * @param \ApiTester $I
+     */
+    public function calculateWrongFileData(\ApiTester $I)
+    {
+
+        $postData = [
+            'currencies' => '{"EUR":1,"USD":0.846405,"LV":0.51129188,"GBP":0.878}',
+            'outputCurrency' => 'GBP'
+        ];
+
+        $I->sendPOST('/documents/calculation', $postData, ['file' => codecept_data_dir('clippings-data-wrong.csv')]);
+
+        $I->seeResponseCodeIs(HttpCode::BAD_REQUEST);
     }
 
     /**

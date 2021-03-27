@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\Document;
+use Codeception\Util\HttpCode;
 
 class CalculateCest
 {
@@ -92,6 +93,86 @@ class CalculateCest
         $method = $reflection->getMethod('validateCurrencies');
         $method->setAccessible(true);
         $result = $method->invokeArgs($this->service, [$currencies]);
+        $I->assertFalse($result);
+    }
+
+    /**
+     * @group calculation
+     * @param UnitTester $I
+     * @throws Exception
+     */
+    public function validateCurrencyInput(UnitTester $I)
+    {
+        $currencies = [
+            'EUR' => 1,
+            'USD' => -0.5,
+            'GBD' => 0.25,
+        ];
+
+        $reflection = new \ReflectionClass(get_class($this->service));
+        $method = $reflection->getMethod('validateCurrencyInput');
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($this->service, ['USD', 'GBD', 100, $currencies]);
+        $I->assertFalse($result);
+    }
+
+    /**
+     * @group calculation
+     * @param UnitTester $I
+     * @throws Exception
+     */
+    public function validateCurrencyInputUndefinedInputCurrency(UnitTester $I)
+    {
+        $currencies = [
+            'EUR' => 1,
+            'USD' => 0.5,
+            'GBD' => 0.25,
+        ];
+
+        $reflection = new \ReflectionClass(get_class($this->service));
+        $method = $reflection->getMethod('validateCurrencyInput');
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($this->service, ['USD1', 'GBD', 100, $currencies]);
+        $I->assertFalse($result);
+    }
+
+    /**
+     * @group calculation
+     * @param UnitTester $I
+     * @throws Exception
+     */
+    public function validateCurrencyInputUndefinedOutputCurrency(UnitTester $I)
+    {
+        $currencies = [
+            'EUR' => 1,
+            'USD' => 0.5,
+            'GBD' => 0.25,
+        ];
+
+        $reflection = new \ReflectionClass(get_class($this->service));
+        $method = $reflection->getMethod('validateCurrencyInput');
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($this->service, ['USD', 'GBD1', 100, $currencies]);
+        $I->assertFalse($result);
+    }
+
+    /**
+     * @group calculation
+     * @param UnitTester $I
+     * @throws Exception
+     */
+    public function validateCurrencyInputWrongAmount(UnitTester $I)
+    {
+        $currencies = [
+            'EUR' => 1,
+            'USD' => 0.5,
+            'GBD' => 0.25,
+        ];
+
+        $reflection = new \ReflectionClass(get_class($this->service));
+        $method = $reflection->getMethod('validateCurrencyInput');
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($this->service, ['USD', 'GBD', -100, $currencies]);
         $I->assertFalse($result);
     }
 

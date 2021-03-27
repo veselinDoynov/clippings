@@ -48,7 +48,7 @@ class Document
 
     protected function convertToCurrency(string $inputCurrency, string $outputCurrency, float $amount, array $currencies)
     {
-        return (1 / $currencies[$outputCurrency]) * ($amount * $currencies[$inputCurrency]);
+        return ($currencies[$inputCurrency] / $currencies[$outputCurrency]) * $amount;
     }
 
     protected function processCalculation(array $data, array $currencies)

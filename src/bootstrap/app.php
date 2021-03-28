@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Middleware\CorsMiddleware;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -79,6 +82,9 @@ $app->configure('app');
 |
 */
 
+$app->middleware([
+    CorsMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

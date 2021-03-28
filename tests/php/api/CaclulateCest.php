@@ -20,7 +20,7 @@ class CaclulateCest extends BaseCest
 
         $I->sendPOST('/documents/calculation', $postData, ['file' => codecept_data_dir('clippings-data.csv')]);
         $total = json_decode($I->grabResponse(), true);
-        $I->assertEquals('5,003.58', number_format($total, 2));
+        $I->assertEquals('5,003.58', number_format($total['data'], 2));
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
@@ -39,7 +39,7 @@ class CaclulateCest extends BaseCest
 
         $I->sendPOST('/documents/calculation', $postData, ['file' => codecept_data_dir('clippings-data.csv')]);
         $total = json_decode($I->grabResponse(), true);
-        $I->assertEquals('1,413.90', number_format($total, 2));
+        $I->assertEquals('1,413.90', number_format($total['data'], 2));
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 

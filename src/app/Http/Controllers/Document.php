@@ -35,7 +35,7 @@ class Document extends Controller
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
         try {
             $data['csvData'] = File::formatForUserImport($sheetData, DocumentService::DOCUMENT_UPLOAD_MAPPING);
-            return $this->sendResponse($this->service->calculate($data));
+            return $this->sendResponse(['data' => $this->service->calculate($data)]);
         } catch (\Throwable $exception) {
             return $this->sendErrorResponse($exception->getMessage());
         }

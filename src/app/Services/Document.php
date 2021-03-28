@@ -78,7 +78,7 @@ class Document
         $total = 0;
 
         foreach ($data['csvData'] as $row) {
-            if (isset($data['vatNumber']) && $data['vatNumber'] != $row['vatNumber']) {
+            if (isset($data['vatNumber']) && (int)$data['vatNumber'] &&  $data['vatNumber'] != $row['vatNumber']) {
                 continue;
             }
             if (!$this->validateCurrencyInput($row['currency'], $data['outputCurrency'], $row['total'], $currencies)) {
